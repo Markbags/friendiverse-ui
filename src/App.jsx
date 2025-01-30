@@ -5,10 +5,11 @@ import './App.css'
 import { I18nProvider } from '@lingui/react'
 import { i18n } from '@lingui/core'
 import { Trans } from '@lingui/react/macro'
-import { loadTranslations } from '@helpers/loadTranslations'
+import { loadInitialTranslations } from '@helpers/i18n/loadTranslations.js'
+import I18nPicker from '@components/i18n/I18nPicker.jsx'
 
-// TODO determine locale from browser or user settings
-await loadTranslations('en')
+// TODO RTL
+await loadInitialTranslations()
 
 function App() {
   const [count, setCount] = useState(0)
@@ -38,6 +39,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <I18nPicker />
     </I18nProvider>
   )
 }

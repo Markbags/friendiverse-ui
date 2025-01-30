@@ -1,60 +1,54 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-01-26 19:01-0600\n"
+"POT-Creation-Date: 2025-01-29 20:36-0600\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: en\n"
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Plural-Forms: \n"
+"Language: ca-ES\n"
 
 #: src/pages/Login.jsx:242
 msgid "Continue"
-msgstr "Continue"
+msgstr ""
 
 #: src/pages/Login.jsx:241
 msgid "Continue with {selectedInstanceText}"
-msgstr "Continue with {selectedInstanceText}"
+msgstr ""
 
 #: src/pages/Login.jsx:250
 msgid "Don't have an account? Create one!"
-msgstr "Don't have an account? Create one!"
+msgstr ""
 
 #: src/pages/Login.jsx:223
 msgid "e.g. “mastodon.social”"
-msgstr "e.g. “mastodon.social”"
+msgstr ""
 
 #: src/pages/Login.jsx:229
 msgid "Failed to log in. Please try again or try another instance."
-msgstr "Failed to log in. Please try again or try another instance."
+msgstr ""
 
 #: src/pages/Login.jsx:112
 #: src/pages/Login.jsx:125
 msgid "Failed to register application"
-msgstr "Failed to register application"
+msgstr ""
 
 #: src/pages/Login.jsx:256
 msgid "Go home"
-msgstr "Go home"
+msgstr ""
 
 #: src/pages/Login.jsx:184
 msgid "Instance"
-msgstr "Instance"
+msgstr ""
 
 #: src/pages/Login.jsx:199
 msgid "instance domain"
-msgstr "instance domain"
+msgstr ""
 
 #: src/pages/Login.jsx:30
 #: src/pages/Login.jsx:180
 msgid "Log in"
-msgstr "Log in"
+msgstr ""
 
 #: src/App.jsx:29
 msgid "This should be translated."
-msgstr "This should be translated."
+msgstr ""
