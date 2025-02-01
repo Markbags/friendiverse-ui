@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useEffect, useRef, useState, useCallback } from 'react'
+import Link, { useSearchParams } from 'react-router-dom'
 
 // TODO EVERYTHING
 
@@ -12,17 +12,19 @@ import { Trans, useLingui } from '@lingui/react/macro'
 // Fuzzy searching
 import Fuse from 'fuse.js'
 
-import LangSelector from '../components/lang-selector'
-import Link from '../components/link'
-import Loader from '../components/loader'
-import instancesListURL from '../data/instances.json?url'
+import I18nPicker from '@components/i18n/I18nPicker'
+import Loader from '@components/Loader'
+import INSTANCES from '@/data/instances.js'
+
 import {
   getAuthorizationURL,
   getPKCEAuthorizationURL,
   registerApplication,
+  supportsPKCE,
 } from '../utils/auth'
-import { supportsPKCE } from '../utils/oauth-pkce'
+
 import store from '../utils/store'
+
 import useTitle from '../utils/useTitle'
 
 const { PHANPY_DEFAULT_INSTANCE: DEFAULT_INSTANCE } = import.meta.env
@@ -35,32 +37,14 @@ function Login() {
   const [uiState, setUIState] = useState('default')
   const [searchParams] = useSearchParams()
   const instance = searchParams.get('instance')
-  const submit = searchParams.get('submit')
   const [instanceText, setInstanceText] = useState(
     instance || cachedInstanceURL?.toLowerCase() || '',
   )
 
-  const [instancesList, setInstancesList] = useState([])
   const searcher = useRef()
   useEffect(() => {
-    ;(async () => {
-      try {
-        const res = await fetch(instancesListURL)
-        const data = await res.json()
-        setInstancesList(data)
-        searcher.current = new Fuse(data)
-      } catch (e) {
-        // Silently fail
-        console.error(e)
-      }
-    })()
+    searcher.current = new Fuse(INSTANCES)
   }, [])
-
-  // useEffect(() => {
-  //   if (cachedInstanceURL) {
-  //     instanceURLRef.current.value = cachedInstanceURL.toLowerCase();
-  //   }
-  // }, []);
 
   const submitInstance = (instanceURL) => {
     if (!instanceURL) return
@@ -142,6 +126,7 @@ function Login() {
         .replace(/^@?[^@]+@/, '') // Remove @?acct@
         .trim()
     : null
+
   const instanceTextLooksLikeDomain =
     /[^\s\r\n\t\/\\]+\.[^\s\r\n\t\/\\]+/.test(cleanInstanceText) &&
     !/[\s\/\\@]/.test(cleanInstanceText)
@@ -162,16 +147,10 @@ function Login() {
         ? instancesList.find((instance) => instance.includes(instanceText))
         : null
 
-  const onSubmit = (e) => {
+  const onSubmit = useCallback((e) => {
     e.preventDefault()
     submitInstance(selectedInstanceText)
-  }
-
-  if (submit) {
-    useEffect(() => {
-      submitInstance(instance || selectedInstanceText)
-    }, [])
-  }
+  }, [])
 
   return (
     <main id="login" style={{ textAlign: 'center' }}>
@@ -258,7 +237,7 @@ function Login() {
             <Trans>Go home</Trans>
           </Link>
         </p>
-        <LangSelector />
+        <I18nPicker />
       </form>
     </main>
   )
